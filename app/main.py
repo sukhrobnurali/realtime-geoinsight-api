@@ -4,6 +4,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 
 from app.config import settings
 from app.api.auth import router as auth_router
+from app.api.geofences import router as geofences_router
 from app.utils.middleware import RateLimitMiddleware, LoggingMiddleware, SecurityHeadersMiddleware
 
 app = FastAPI(
@@ -36,6 +37,7 @@ app.add_middleware(RateLimitMiddleware)
 
 # Include routers
 app.include_router(auth_router, prefix="/api/v1")
+app.include_router(geofences_router, prefix="/api/v1")
 
 
 @app.get("/")
