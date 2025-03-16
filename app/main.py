@@ -6,6 +6,8 @@ from app.config import settings
 from app.api.auth import router as auth_router
 from app.api.geofences import router as geofences_router
 from app.api.devices import router as devices_router
+from app.api.routing import router as routing_router
+from app.api.recommendations import router as recommendations_router
 from app.utils.middleware import RateLimitMiddleware, LoggingMiddleware, SecurityHeadersMiddleware
 
 app = FastAPI(
@@ -40,6 +42,8 @@ app.add_middleware(RateLimitMiddleware)
 app.include_router(auth_router, prefix="/api/v1")
 app.include_router(geofences_router, prefix="/api/v1")
 app.include_router(devices_router, prefix="/api/v1/devices", tags=["devices"])
+app.include_router(routing_router, prefix="/api/v1/routes", tags=["routing"])
+app.include_router(recommendations_router, prefix="/api/v1/recommendations", tags=["recommendations"])
 
 
 @app.get("/")
